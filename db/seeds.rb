@@ -14,25 +14,33 @@ def random_brand_id
   Brand.offset(rand(Brand.count)).first.id
 end
 
+def upload_fake_logo
+  uploader = LogoUploader.new(Brand.new, :logo)
+  uploader.cache!(File.open(Dir.glob(File.join(Rails.root, 'lib/tasks/brands', '*')).sample))
+  uploader
+end
+
 def upload_fake_image
   uploader = ImageUploader.new(Sneaker.new, :image)
   uploader.cache!(File.open(Dir.glob(File.join(Rails.root, 'lib/tasks/sneakers', '*')).sample))
   uploader
 end
 
-def upload_fake_logo
-  uploader = LogoUploader.new(Logo.new, :logo)
-  uploader.cache!(File.open(Dir.glob(File.join(Rails.root, 'lib/tasks/brands', '*')).sample))
-  uploader
-end
 
-@sneaker_models = ['Air Max', 'Cortez', 'Blazer', 'Dunk', 'Zoom']
 @brand_names = ['Nike', 'Adidas', 'New Balance', 'Reebok', 'Puma', 'Yonex', 'Merrell', 'Columbia']
+@sneaker_models = ['Air Max', 'Cortez', 'Blazer', 'Dunk', 'Zoom']
 @sneaker_sex = ['male', 'female', 'unisex']
 
 
 def sneaker_price
   rand(8000..25000)
+end
+
+def create_brand
+  Brand.create(
+    name: @brand_names.sample,
+    logo: upload_fake_logo
+  )
 end
 
 def create_sneaker
@@ -42,13 +50,6 @@ def create_sneaker
     sex: @sneaker_sex.sample,
     price: sneaker_price,
     image: upload_fake_image
-  )
-end
-
-def create_brand
-  Brand.create(
-    logo: upload_fake_logo,
-    name: @brand_names.sample
   )
 end
 
