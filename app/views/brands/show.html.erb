@@ -11,3 +11,13 @@
 
 <%= link_to 'Edit', edit_brand_path(@brand) %> |
 <%= link_to 'Back', brands_path %>
+
+<hr>
+
+<%#= render 'sneakers/index' %>
+
+<% @sneakers.each do |sneaker| %>
+  <%= render 'sneakers/show', sneaker: sneaker %>
+<% end %>
+
+<%= render 'sneakers/form', sneaker: Sneaker.new %>

@@ -11,11 +11,15 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :brand_id %>
-    <%#= f.number_field :brand_id %>
-    <%= select("sneaker", "brand_id", Brand.all.collect {|b| [ b.name, b.id ] }, { include_blank: true }) %>
-  </div>
+  <% if @brand %>
+    <%= f.hidden_field :brand_id, value: @brand.id %>
+  <% else %>
+    <div class="field">
+      <%= f.label :brand_id %>
+      <%#= f.number_field :brand_id %>
+      <%= select("sneaker", "brand_id", Brand.all.collect {|b| [ b.name, b.id ] }, { include_blank: true }) %>
+    </div>
+  <% end %>
 
   <div class="field">
     <%= f.label :image %>

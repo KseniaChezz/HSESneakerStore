@@ -10,6 +10,7 @@ class BrandsController < ApplicationController
   # GET /brands/1
   # GET /brands/1.json
   def show
+    @sneakers = @brand.sneakers
   end
 
   # GET /brands/new

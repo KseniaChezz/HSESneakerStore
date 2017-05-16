@@ -1,0 +1,18 @@
+<h2><%= link_to sneaker.model, sneaker %></h2>
+
+<p>
+  <strong>Sex:</strong>
+  <%= sneaker.sex %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= sneaker.price %>
+</p>
+
+<div>
+  <%= image_tag sneaker.image %>
+</div>
+
+<%= link_to 'Edit', edit_sneaker_path(sneaker) %>
+<%= link_to 'Destroy', sneaker, method: :delete, data: { confirm: 'Are you sure?' } %>
